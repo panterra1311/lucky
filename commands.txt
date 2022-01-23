@@ -1,0 +1,121 @@
+Дополнение к заданию № 2.9 модуль D
+(на примере user05, author05, category05,article05,news05,comment05
+-до этого я применяла другой подход) 
+
+1.user05 = User.objects.create_user(username='Luck')
+
+2.author05 = Author.objects.create(authorUser = user05)
+
+3.category05 = Category.objects.create(name='Business')
+
+4.article05 = Post.objects.create(author=author05, categoryType='AR', title='Strategic planning in business', text='Any undertaking, both in life and in business, is based on an understanding of the goal, for the achievement of which, in fact, a commitment was made. However, "to see the goal, but not to see the obstacles" is a truth that in today is highly competitive environment will inevitably lead to the death of the entire enterprise')
+
+5.news05 = Post.objects.create(author=author05, categoryType='NW', title='Business news', text='The maritime industry is restoring the right course: the successes and failures of the outgoing 2021')
+
+6.article05.postCategory.add(category05)
+
+7.news05.postCategory.add(category05)
+
+8.comment05 = Comment.objects.create(commentPost=article05, commentUser=user05, text='Great article')
+
+9.comment05 = Comment.objects.create(commentPost=news05, commentUser =user05, text='What an unexpected turn of events')
+
+10.comment05.article05.like()
+
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+article05.like()
+
+11.article05.dislike()
+
+12.news05.like()
+news05.like()
+news05.like()
+news05.like()
+
+13.comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+comment05.like()
+
+14.author05.update_rating()
+
+15.author05.ratingAuthor
+
+99
+
+>>>
+
+
+16.best = Author.objects.all().order_by('-ratingAuthor').values('authorUser', 'ratingAuthor')[0]
+
+17.print(best)
+
+18.{'authorUser': 7, 'ratingAuthor': 99}
+
+>>>
+
+
+Вывожу дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье
+
+
+19.Post.objects.all().order_by('-rating').values('categoryType', 'dateCreation',  'author', 'postCategory', 'comment', 'rating', 'title', 'text')[0]
+{'categoryType': 'AR', 'dateCreation': datetime.datetime(2022, 1, 1, 13, 51, 20, 249194, tzinfo=datetime.timezone.utc), 'author': 3, 'postCategory': 5, 'comment': 6, 'rating': 25, 'title': 'Strategic planning in business', 'text': 'Any  undertaking, both in life and in business, is based on an understanding of the goal, for the achievement of which, in fact, a commitment was made. However, "to see the goal, but not to see the obstacles" is a truth that in today is hi ghly competitive environment will inevitably lead to the death of the entire enterprise'}
+
+
+
+Вывожу все комментарии (дата, пользователь, рейтинг, текст) к этой статье
+
+
+20.Comment.objects.all().order_by().values('dateCreation', 'commentUser', 'rating', 'text')[0]
+
+{'dateCreation': datetime.datetime(2021, 12, 30, 18, 28, 5, 935907, tzinfo=datetime.timezone.utc), 'commentUser': 1, 'rating': 3, 'text': 'All our posts are aimed at making your life more beautiful, interesting and exciting'}
+
+21. best = Comment.objects.all().order_by('-ratingComment').values('postCategory', 'ratingComment')[0]
+
+22.print(best)
+
+
+А это без рейтинга – просто все 
+
+
+23. Comment.objects.all().order_by().values('dateCreation', 'commentUser', 'text')
+<QuerySet [{'dateCreation': datetime.datetime(2021, 12, 30, 18, 28, 5, 935907, tzinfo=datetime.timezone.utc), 'commentUser': 1, 'text': 'All our posts are aimed at making your life more beautiful, interesting and exciting'}, {'dateCrea
+tion': datetime.datetime(2021, 12, 31, 22, 22, 48, 617895, tzinfo=datetime.timezone.utc), 'commentUser': 1, 'text': 'Fashion is what designers offer you 4 times a year. And the style is what you choose!'}, {'dateCreation': datetime.dat
+etime(2021, 12, 31, 22, 30, 12, 143311, tzinfo=datetime.timezone.utc), 'commentUser': 1, 'text': 'Style is a way of saying who you are without using words'}, {'dateCreation': datetime.datetime(2021, 12, 31, 22, 34, 58, 604055, tzinfo=d
+atetime.timezone.utc), 'commentUser': 6, 'text': 'Health is pleasure itself or inevitably generates pleasure, as fire creates warmth'}, {'dateCreation': datetime.datetime(2021, 12, 31, 22, 40, 57, 390249, tzinfo=datetime.timezone.utc),
+ 'commentUser': 6, 'text': 'In pursuit of beauty standards, real happiness can be missed'}, {'dateCreation': datetime.datetime(2022, 1, 1, 14, 27, 42, 755639, tzinfo=datetime.timezone.utc), 'commentUser': 7, 'text': 'Great article'}, {
+'dateCreation': datetime.datetime(2022, 1, 1, 14, 32, 8, 114349, tzinfo=datetime.timezone.utc), 'commentUser': 7, 'text': 'What an unexpected turn of events'}]>
+
+>>> exit()
+
+
+
+
